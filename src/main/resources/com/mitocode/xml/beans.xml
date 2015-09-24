@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="mundo" class="com.mitocode.beans.Mundo">
+	<property name="saludo" value="Hola mundo">
+	</property>
+</bean>
+
+<bean id="persona" class="com.mitocode.beans.Persona">
+	<constructor-arg index="2" value="mitocode"></constructor-arg>
+	<constructor-arg index="0" value="1"></constructor-arg>
+	<constructor-arg index="1" value="Cesar"></constructor-arg>
+</bean>
+
+<!-- Autowiring -->
+<bean id="persona2PorAuto" class="com.mitocode.beans.Persona2" autowire="byName"/>
+
+
+<bean id="persona2" class="com.mitocode.beans.Persona2" name="personaAlias">
+	<property name="id" value="1"/>
+	<property name="nombre" value="Cesar"/>
+	<property name="apodo" value="tmac"/>
+	<property name="pais" ref="pais"/>
+</bean>
+
+<bean id="pais" class="com.mitocode.beans.Pais">
+	<property name="nombre" value="Mexico"/>
+	<property name="ciudad" ref="ciudad"/>
+</bean>
+
+<bean id="ciudad" class="com.mitocode.beans.Ciudad">
+	<property name="nombre" value="DF"/>
+	<property name="colonia">
+			<!-- Beans anidados !!! -->
+		<bean id="colonia" class="com.mitocode.beans.Colonia">
+			<property name="nombre" value="Lomas"/>
+		</bean>
+	</property>
+	
+	<property name="calles">
+		<list>
+			<ref bean="calle1"/>
+			<ref bean="calle2"/>
+			<ref bean="calle3"/>
+		</list>
+	</property>
+	
+</bean>
+
+<bean id="calle1" class="com.mitocode.beans.Calle">
+	<property name="nombre" value="ninos"/>
+</bean>
+<bean id="calle2" class="com.mitocode.beans.Calle">
+	<property name="nombre" value="15Sep"/>
+</bean>
+<bean id="calle3" class="com.mitocode.beans.Calle">
+	<property name="nombre" value="joseMa"/>
+</bean>
+
+
+<alias name="persona" alias="personaBean"/>
+
+</beans>
