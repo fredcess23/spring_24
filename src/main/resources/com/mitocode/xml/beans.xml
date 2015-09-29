@@ -14,7 +14,7 @@
 	<constructor-arg index="1" value="Cesar"></constructor-arg>
 </bean>
 
-<!-- Autowiring -->
+<!-- Autowiring , sometimes it gets confusing !-->
 <bean id="persona2PorAuto" class="com.mitocode.beans.Persona2" autowire="byName"/>
 
 
@@ -61,5 +61,63 @@
 
 
 <alias name="persona" alias="personaBean"/>
+
+
+<!-- Herencia de beans -->
+
+<bean id="trianguloPadre" class="com.mitocode.beans.Triangulo">
+	<property name="puntoA" ref="puntoA"></property>
+</bean>
+
+<bean id="triangulo1" class="com.mitocode.beans.Triangulo" parent="trianguloPadre">
+	<property name="puntoB" ref="puntoB"></property>
+	<property name="puntoC" ref="puntoC"></property>	
+</bean>
+
+<bean id="puntoA" class="com.mitocode.beans.Punto">
+	<property name="x" value="0"></property>
+	<property name="y" value="1"></property>	
+</bean>
+<bean id="puntoB" class="com.mitocode.beans.Punto">
+	<property name="x" value="2"></property>
+	<property name="y" value="3"></property>	
+</bean>
+<bean id="puntoC" class="com.mitocode.beans.Punto">
+	<property name="x" value="4"></property>
+	<property name="y" value="5"></property>	
+</bean>
+
+
+
+<bean id="cuadradoPadre" class="com.mitocode.beans.Cuadrado">
+	<property name="puntos">
+		<list>
+			<ref bean="puntoA"/>
+			<ref bean="puntoB"/>
+		</list>
+	</property>
+</bean>
+
+<bean id="cuadrado1" class="com.mitocode.beans.Cuadrado" parent="cuadradoPadre">
+	<property name="puntos">
+		<list merge="true"> <!-- Para que no sobrescriba a los elem del bean padre -->
+			<ref bean="puntoC"/>
+		</list>
+	</property>
+</bean>
+
+<bean id="circulo" class="com.mitocode.beans.Circulo"/>
+
+<!-- Singleton y Protoype -->
+
+<bean id="personaScope" class="com.mitocode.beans.Persona2" scope="prototype">
+	<property name="id" value="1"/>
+	<property name="nombre" value="Cesar"/>
+	<property name="apodo" value="tmac"/>
+	<property name="pais" ref="pais"/>
+</bean>
+
+
+
 
 </beans>
