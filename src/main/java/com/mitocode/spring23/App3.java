@@ -1,6 +1,7 @@
 package com.mitocode.spring23;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.mitocode.beans.Calle;
@@ -11,6 +12,8 @@ import com.mitocode.beans.Persona;
 import com.mitocode.beans.Persona2;
 import com.mitocode.beans.Punto;
 import com.mitocode.beans.Triangulo;
+import com.mitocode.beans.Triangulo2;
+import com.mitocode.beans.Triangulo3;
 
 public class App3 {
 
@@ -48,6 +51,13 @@ public class App3 {
 		System.out.println("BEAN SCOPE --> Diferencias entre Singleton y Prototype");
 		System.out.println(personaScope1);
 		System.out.println(personaScope2);
+
+		//Callbacks al ciclo de vida
+		AbstractApplicationContext appContext3 = new ClassPathXmlApplicationContext("com/mitocode/xml/beans.xml");
+		appContext3.registerShutdownHook(); //destruir todos los beans necesarios, se usa en app de escritorio, en web es auto
+		
+		Triangulo2 triangulo2 = (Triangulo2) appContext3.getBean("triangulo2"); //factory design
+		Triangulo3 triangulo3 = (Triangulo3) appContext.getBean("triangulo3"); //factory design
 
 	}
 

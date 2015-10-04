@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-init-method=""
+	default-destroy-method="">
 
 <bean id="mundo" class="com.mitocode.beans.Mundo">
 	<property name="saludo" value="Hola mundo">
@@ -110,14 +112,29 @@
 
 <!-- Singleton y Protoype -->
 
-<bean id="personaScope" class="com.mitocode.beans.Persona2" scope="prototype">
+<!--  
+- Prototype , la carga es a medida que se invoca getBean.
+- Con lazy=true, los beans no son instanciados automaticamente cuando se levanta la app , instanciados cuando se le requiera.
+- la interfaz BeanFactory hace que todos los beans sean lazy.
+- Lazy loading ! solo aplica cuando el scope es singleton.
+-->
+
+<bean id="personaScope" class="com.mitocode.beans.Persona2" scope="singleton" lazy-init="true">
 	<property name="id" value="1"/>
 	<property name="nombre" value="Cesar"/>
 	<property name="apodo" value="tmac"/>
 	<property name="pais" ref="pais"/>
 </bean>
 
-
+<!-- callbacks  , ciclo de vida de los beans-->
+<bean id="triangulo2" class="com.mitocode.beans.Triangulo2">
+	<property name="puntoB" ref="puntoB"></property>
+	<property name="puntoC" ref="puntoC"></property>	
+</bean>
+<bean id="triangulo3" class="com.mitocode.beans.Triangulo3" init-method="miInicializacion" destroy-method="miDestruccion">
+	<property name="puntoB" ref="puntoB"></property>
+	<property name="puntoC" ref="puntoC"></property>	
+</bean>
 
 
 </beans>
