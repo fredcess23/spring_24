@@ -27,11 +27,11 @@ public class Triangulo3 {
 	}
 	public void miInicializacion() {
 
-		System.out.println("Inicializando mi bean...");
+		System.out.println("Inicializando bean usando init-method annotation...");
 	}
 	public void miDestruccion()  {
 
-		System.out.println("Destruyendo mi bean...");
+		System.out.println("Destruyendo bean usando destroy-method annotation...");
 
 	}
 	

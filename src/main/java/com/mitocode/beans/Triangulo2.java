@@ -29,11 +29,11 @@ public class Triangulo2 implements InitializingBean, DisposableBean{
 	}
 	public void afterPropertiesSet() throws Exception {
 
-		System.out.println("Inicializando bean...");
+		System.out.println("Inicializando bean implementando InitializingBean class");
 	}
 	public void destroy() throws Exception {
 
-		System.out.println("Destruyendo bean...");
+		System.out.println("Destruyendo bean implementando DisposableBean class");
 
 	}
 	

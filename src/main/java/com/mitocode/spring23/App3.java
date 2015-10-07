@@ -14,6 +14,7 @@ import com.mitocode.beans.Punto;
 import com.mitocode.beans.Triangulo;
 import com.mitocode.beans.Triangulo2;
 import com.mitocode.beans.Triangulo3;
+import com.mitocode.beans.Triangulo4;
 
 public class App3 {
 
@@ -58,7 +59,9 @@ public class App3 {
 		
 		Triangulo2 triangulo2 = (Triangulo2) appContext3.getBean("triangulo2"); //factory design
 		Triangulo3 triangulo3 = (Triangulo3) appContext.getBean("triangulo3"); //factory design
+		Triangulo4 triangulo4 = (Triangulo4) appContext.getBean("triangulo4"); //factory design
 
+		
 	}
 
 		
