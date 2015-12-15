@@ -20,11 +20,12 @@ public class App {
 		
 		//Anotations !
 		
+		// first way
 		ApplicationContext appContext2 = new AnnotationConfigApplicationContext(AppConfig.class,AppConfig2.class);
 		Mundo2 m2 = (Mundo2)appContext2.getBean("marte"); //factory design , any bean in any appConfig class
 		System.out.println(m2.getSaludo());
 		
-		
+		// second way
 		AnnotationConfigApplicationContext appContext3 = new AnnotationConfigApplicationContext();
 		appContext3.register(AppConfig.class);
 		appContext3.register(AppConfig2.class);

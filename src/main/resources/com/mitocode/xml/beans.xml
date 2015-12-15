@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
-	default-init-method=""
-	default-destroy-method="">
+	default-init-method="" default-destroy-method=""
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
 <bean id="mundo" class="com.mitocode.beans.Mundo">
 	<property name="saludo" value="Hola mundo">
@@ -138,10 +139,56 @@
 <!-- to recognize the java annotations -->
 <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
 
-<!-- PostContruct and PreDestroy -->
+<!-- Using annotations -> @PostContruct and @PreDestroy -->
 <bean id="triangulo4" class="com.mitocode.beans.Triangulo4">
 	<property name="puntoB" ref="puntoB"></property>
 	<property name="puntoC" ref="puntoC"></property>	
 </bean>
+
+<!-- BeanPostProcessor , Evaluates every bean that is mapped in this file 
+It is executed when this file is uploaded, so it is executed before every single bean !-->
+
+<bean class="com.mitocode.beans.MyCodeBeanPostProcessor"/>
+
+
+
+<bean id="messi" class="com.mitocode.beans.Jugador">
+	<property name="numero" value="10"></property>
+	<property name="nombre" value="Lionel Messi"></property>
+	<!--  <property name="equipo" ref="barcelona"></property>-->
+
+</bean>
+
+<bean id="barcelona" class="com.mitocode.beans.Barcelona">
+	<qualifier value="barcelonaQualifier"></qualifier>
+</bean>
+
+<bean id="manchester" class="com.mitocode.beans.Manchester"/>
+
+<!-- TIP: Check: xmlns:context (on top) , should be present -->
+
+<!-- When we use required or autowired annotation, it´s needed to use PostProcessors
+in order to see the description of the exception instead of NullPointerException-->
+					<!-- POST PROCESSORS !!! -->
+<bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
+<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+					
+						<!-- OR -->
+<!-- We can replace the post-processor annotations and then use : -->
+<!-- In order to recognize any spring annotation, it is faster-->
+<context:annotation-config/>
+
+
+			<!-- STEREOTYPES -->
+			
+<!-- Scan that package that includes the spring stereotypes -->
+<!-- No needed to define beans anymore -->
+<context:component-scan base-package="com.mitocode.beans"></context:component-scan>
+
+<!-- Diference between context:annotation-config and context:component-scan -->
+<!-- context:annotation-config only recognize some annotation (JSR-250) like autowired or qualifier -->
+<!-- When we use :  context:component-scan  ,   context:annotation-config is optional-->
+
+
 
 </beans>

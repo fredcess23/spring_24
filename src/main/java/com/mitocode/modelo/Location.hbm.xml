@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+   
+    <class name="com.incidents.model.Location" table="location">
+        
+        <id name="id" type="integer" column="id" >
+            <generator class="increment" ></generator>
+        </id>
+        <property name="country" type="string" column="country"></property>
+        <property name="state" type="string" column="state"></property>
+        <property name="city" type="string" column="city"></property>
+        <property name="street" type="string" column="street"></property>
+        <property name="zip" type="string" column="zip"></property>
+        <property name="latitude" type="string" column="latitude"></property>
+        <property name="longitude" type="string" column="longitude"></property>
+        <property name="incidentId" type="int" column="incident_id"></property>
+
+    </class>
+  
+
+</hibernate-mapping>

@@ -11,10 +11,14 @@ package com.mitocode.spring23;
  */
 
 import org.hibernate.SessionFactory;
+
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import com.mitocode.modelo.User;
 import com.mitocode.modelo.Usuario;
 
 public class Test1 {
@@ -37,10 +41,26 @@ public class Test1 {
         
         
         System.out.println("Creamos el objeto a persistir...");
-        Usuario unUsuario= new Usuario("Cesar", "Cruz", "kobebryant");
-      
+        //Usuario unUsuario= new Usuario("daysy", "Cruz", "kobebryant");
+        //User user= new User("papa", "Cruz", "kobebryant","victim", 62, 3);
+
+
+        
         System.out.println("guardamos el objeto...");
-        session.save(unUsuario);
+        //session.save(unUsuario);
+        //session.save(user);
+        
+        //Recover
+        //List<Usuario> personList= session.createCriteria(Usuario.class).list();
+        //System.out.println(personList);
+
+        List<User> lista= session.createCriteria(User.class).list();
+        
+        for(User u:lista){
+            System.out.println(u.getId() + " " +u.getName());        
+
+        }
+        
         
         System.out.println("Cerramos la transaccion...");
         tr.commit();

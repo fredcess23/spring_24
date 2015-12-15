@@ -8,7 +8,10 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">daysyman</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-    <mapping resource="com/mitocode/modelo/Usuario.hbm.xml"></mapping>
+    <!--  <mapping resource="com/mitocode/modelo/Usuario.hbm.xml"></mapping>
+    <mapping resource="com/mitocode/modelo/User.hbm.xml"></mapping>
+    -->
+    <mapping class="com.mitocode.modelo.User" />
     
   </session-factory>
 </hibernate-configuration>
